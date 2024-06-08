@@ -1,0 +1,41 @@
+2a
+entry pint addr: 0x804816c 
+this is the function that procedes main -> 8: 08048156[virtual address]     0 NOTYPE  GLOBAL DEFAULT    2 _start
+
+2b:
+1.run chmod u+x deep_thought
+2. run hexeditplus with unit_size = 4 
+3. memory modify with location 18 and val = 08048156[virtual address of _start]
+4. new entry : 0x08048156
+
+************************************************************************************************
+how to check the offset of virtual entry address:
+
+this is the struct in the header :
+
+#define EI_NIDENT (16)
+
+typedef struct
+{
+  unsigned char	e_ident[EI_NIDENT];	/* Magic number and other info */
+  Elf32_Half	e_type;			/* Object file type */
+  Elf32_Half	e_machine;		/* Architecture */
+  Elf32_Word	e_version;		/* Object file version */
+  Elf32_Addr	e_entry;		/* Entry point virtual address */
+  Elf32_Off	e_phoff;		/* Program header table file offset */
+  Elf32_Off	e_shoff;		/* Section header table file offset */
+  Elf32_Word	e_flags;		/* Processor-specific flags */
+  Elf32_Half	e_ehsize;		/* ELF header size in bytes */
+  Elf32_Half	e_phentsize;		/* Program header table entry size */
+  Elf32_Half	e_phnum;		/* Program header table entry count */
+  Elf32_Half	e_shentsize;		/* Section header table entry size */
+  Elf32_Half	e_shnum;		/* Section header table entry count */
+  Elf32_Half	e_shstrndx;		/* Section header string table index */
+} Elf32_Ehdr;
+
+steps: 
+1.  " unsigned char	e_ident[EI_NIDENT];	/* Magic number and other info */ " is 16 bytes (sizeof(char)=1);
+2. "Elf32_Half	e_machine;		/* Architecture */" -> Elf32_Half is 2 bytes;
+3. "  Elf32_Half	e_type;			/* Object file type */" -> Elf32_Half is 2 bytes;
+4. "  Elf32_Word	e_version;		/* Object file version */" -> Elf32_Word is 4 bytes
+5. sum: 16 + 2 + 2 + 4 = 24 bytes --> so in hex base is 0x18

@@ -1,0 +1,32 @@
+task4:
+address of digit_cnt : 0000052d
+size : 80
+section : 14 [.text section] - > [entry addr: 000003f0]  [offset : 0003f0]
+
+formula to calculate offset of function in file :
+ section_file_offset + function_virtual_address - section_virtual_address
+
+ 0003f0 + 0000052d -000003f0 =>  0x52d -> new digit_cnt offset
+
+
+
+ntsc:
+calculate target_location 
+address of digit_cnt : 00000577
+size : 1136
+section : 14 [.text section] - > [entry addr: 00000410]  [offset : 000410]
+
+formula to calculate offset of function in file :
+ section_file_offset + function_virtual_address - section_virtual_address
+
+ 000410 + 00000577 -00000410 => 0x577 ->  digit_cnt offset
+
+target_location = 577
+
+
+ steps : [assuming unit_size = 1]
+ 1. open exec file : task4 [option 1]
+ 2. load to hexeditplus the task4 exec with location=52D , length=80 [option 3]
+ 3. open exec file : ntsc [option 1]
+ 4. save into file [address = 0, target_location = 577 , length = 80]
+ 5. quit

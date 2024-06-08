@@ -1,0 +1,17 @@
+address : 08048464
+size : 175
+section : 13 [.text section] - > [entry addr: 080483b0]  [offset : 0003b0]
+
+formula to calculate offset of function in file :
+ section_file_offset + function_virtual_address - section_virtual_address
+
+ 0003b0 + 08048464 -080483b0 => 8048814 - 080483b0 = 0x464 
+
+
+
+
+
+ 3b
+the first two manchine instructions called in main function are : offset main 0x464
+55 - push ebp
+89E5 - mov ebp,esp

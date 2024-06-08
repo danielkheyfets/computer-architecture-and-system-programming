@@ -1,0 +1,29 @@
+
+    1.Where is the entry point specified, and what is its value?
+    ANS: in ELF Header, its value is the address in memory
+
+    2.How many sections are there in a.out?
+    ANS: 33
+
+    3.What is the size of the .text section?
+    ANS: 0001b8 -> 440
+
+    4.Does the symbol _start occur in the file? If so, where is it mapped to in virtual memory?
+    ANS: 57: 080482e0     0 FUNC    GLOBAL DEFAULT   12 _start
+            080482e0 -> .text section
+
+
+    5.Does the symbol main occur in the file? If so, where is it mapped to in virtual memory?
+    ANS: 60: 08048388    51 FUNC    GLOBAL DEFAULT   12 main
+            .text range = [080482e0,8048498] -> 08048388 in range therefore main is in .text section
+            [section_file_offset + function_virtual_address - section_virtual_address]->
+            0002e0 + 08048388 - 080482e0 = 388
+
+
+    6.Where in the file does the code of function "main" start? 
+    ANS: .text range = [080482e0,8048498] -> 08048388 in range therefore main is in .text section
+        08048388-080482e0 = A8 
+        offset .text is = 2e0
+        therefore the first byte of main : A8+2E0= 388 (HEX) [or 904 in decimal]
+
+
